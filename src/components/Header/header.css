@@ -1,0 +1,31 @@
+header {
+  min-height: 40px;
+  display: flex;
+  width: 100%;
+  padding-top: 10px;
+  border-bottom: 2px solid #009578;
+}
+
+.logo-link {
+  margin-left: 10px;
+  margin-right: auto;
+}
+
+header .nav-links {
+  margin-right: 2em;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  font-family: "Syne Mono", monospace;
+  font-size: 1.25rem;
+}
+
+header .link {
+  text-decoration: none;
+  height: 100%;
+  color: #009578;
+}
+
+header .link:visited {
+  color: #009578;
+}
