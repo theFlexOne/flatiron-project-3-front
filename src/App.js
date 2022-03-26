@@ -1,12 +1,12 @@
 import "./App.css";
+import Main from "./components/Main/Main";
 import Header from "./components/Header/Header";
-import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
     <div className="app">
       <Header />
-      <AppRoutes />
+      <Main />
     </div>
   );
 }
