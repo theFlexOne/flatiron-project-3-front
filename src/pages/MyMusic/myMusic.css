@@ -1,9 +1,0 @@
-.main-content.my-music {
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex-grow: 1;
-  /* color: #ad0f98 */
-}
