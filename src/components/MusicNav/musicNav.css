@@ -1,0 +1,39 @@
+.music-tabs {
+  flex-grow: 1;
+  display: flex;
+  text-align: center;
+  background-color: #004d3d;
+  min-height: 40px;
+  align-items: center;
+  font-family: "Syne Mono", monospace;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.music-tab {
+  flex-grow: 1;
+  flex-basis: 1;
+}
+
+.music-tab.selected {
+  margin: 0.15rem 0.35rem;
+  background-color: #3a303f;
+  color: #004d3d;
+}
+
+.music-tab:hover {
+  cursor: pointer;
+}
+
+.music-tab:not(:last-of-type) {
+  border-right: 1.5px solid #1c1320;
+}
+
+.music-tab a {
+  color: #1c1320;
+  text-decoration: none;
+}
+
+.music-tab a:visited {
+  color: #1c1320;
+}
