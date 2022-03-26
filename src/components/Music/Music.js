@@ -2,7 +2,6 @@ import React from "react";
 import "./music.css";
 import MusicNav from "../MusicNav/MusicNav";
 import { AVAILABLE_MODELS } from "../../helpers/constants";
-import { useLocation } from "react-router-dom";
 
 const models = AVAILABLE_MODELS.map((model) => {
   const path = model.toLowerCase();
@@ -11,12 +10,9 @@ const models = AVAILABLE_MODELS.map((model) => {
 });
 
 const Music = () => {
-  const { pathname } = useLocation();
-  const currentPath = pathname.match(/\/music\/?(.*)/)[1];
-
   return (
     <div className="music">
-      <MusicNav currentPath={currentPath} models={models}></MusicNav>
+      <MusicNav models={models}></MusicNav>
     </div>
   );
 };
