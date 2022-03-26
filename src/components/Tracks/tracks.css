@@ -1,0 +1,26 @@
+.tracks-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  gap: 1rem;
+}
+
+.tracks-table {
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.9rem;
+  min-width: 80%;
+}
+
+.tracks-table thead tr {
+  background-color: #009979;
+  color: #fff;
+  text-align: left;
+}
+
+.tracks-table th,
+.tracks-table td {
+  padding: 0.75rem 1rem;
+}

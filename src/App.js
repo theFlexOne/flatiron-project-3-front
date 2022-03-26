@@ -1,15 +1,12 @@
 import "./App.css";
 import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
-import { AppProvider } from "./contexts/AppContext";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
     <div className="app">
-      <AppProvider>
-        <Header />
-        <Main />
-      </AppProvider>
+      <Header />
+      <AppRoutes />
     </div>
   );
 }

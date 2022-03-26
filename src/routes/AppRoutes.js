@@ -1,8 +1,11 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import MyMusic from "../../pages/MyMusic/MyMusic";
+import MyMusic from "../pages/MyMusic/MyMusic";
 
-const Main = () => {
+const AppRoutes = () => {
+  // no major business logic here
+  //just a simple/clean routes component
+
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/my_music" />} />
@@ -11,4 +14,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default AppRoutes;

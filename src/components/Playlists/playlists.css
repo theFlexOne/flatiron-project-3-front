@@ -1,0 +1,36 @@
+.playlists-container {
+  display: flex;
+  padding: 1rem;
+}
+
+.playlists-list-container {
+  display: flex;
+  flex-basis: 100%;
+}
+
+.playlists-list-container.selected {
+  flex-basis: 33%;
+}
+
+.playlists-container.selected .playlist-container {
+  flex-basis: 100%;
+  background: hsl(168, 15%, 10%);
+}
+
+.playlists-list {
+  list-style: none;
+  display: flex;
+  /* flex-direction: column; */
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.playlist-details-container {
+  display: none;
+  align-items: flex-start;
+  flex-basis: 100%;
+}
+
+.playlist-details-container.selected {
+  display: flex;
+}

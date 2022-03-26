@@ -1,8 +1,15 @@
 import React from "react";
 // import URLHelper from "../../helpers/URLHelper";
 import { Link } from "react-router-dom";
-import NavLink from "../NavLink/NavLink";
 import "./header.css";
+
+const HeaderLink = ({ children, ...other }) => {
+  return (
+    <Link className="nav-link link" {...other}>
+      {children}
+    </Link>
+  );
+};
 
 const Header = () => {
   return (
@@ -11,10 +18,10 @@ const Header = () => {
         <img src="assets/Playlist-Creator_logo.png" alt="logo" height="30px" />
       </Link>
       <nav className="nav-links">
-        <NavLink to="/my_music">My Music</NavLink>
-        <NavLink to="/spotify">Search Spotify</NavLink>
-        <a href="https://www.github.com/theflexone" className="link">
-          My GitHub Page
+        <HeaderLink to="/my_music">My Music</HeaderLink>
+        <HeaderLink to="/spotify">Search Spotify</HeaderLink>
+        <a className="link" href="https://www.github.com">
+          GitHub
         </a>
       </nav>
     </header>

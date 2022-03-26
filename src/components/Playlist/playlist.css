@@ -1,0 +1,14 @@
+.playlist-container {
+  border: 1px solid hsl(280, 14%, 10%);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: hsl(280, 14%, 40%);
+  color: hsl(168, 100%, 10%);
+  font-family: "Syne Mono", monospace;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  flex-grow: 1;
+  flex-basis: min-content;
+}
