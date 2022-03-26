@@ -6,18 +6,20 @@ header {
   border-bottom: 2px solid #009578;
 }
 
-.logo-link {
+.logo {
   margin-left: 10px;
   margin-right: auto;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 header .nav-links {
-  margin-right: 2em;
+  margin-right: 4em;
   display: flex;
   align-items: center;
   gap: 2em;
   font-family: "Syne Mono", monospace;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 header .link {
