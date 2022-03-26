@@ -1,8 +1,13 @@
 import React from "react";
 import "./musicNav.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const MusicNav = ({ currentPath, models }) => {
+const PATH_REGEXP = new RegExp(/\/music\/?(.*)/);
+
+const MusicNav = ({ models }) => {
+  const { pathname } = useLocation();
+  const currentPath = pathname.match(PATH_REGEXP)?.[1];
+
   const Tab = ({ path, children }) => {
     const selected = path === currentPath ? "selected" : "";
     return (
@@ -19,7 +24,11 @@ const MusicNav = ({ currentPath, models }) => {
   return (
     <div className="music-nav music-tabs tabs">
       {models.map(({ path, label }) => {
-        return <Tab path={path}>{label}</Tab>;
+        return (
+          <Tab key={path} path={path}>
+            {label}
+          </Tab>
+        );
       })}
     </div>
   );
