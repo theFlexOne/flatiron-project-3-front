@@ -1,4 +1,8 @@
-const AVAILABLE_MODELS = ["playlists", "albums", "artists"];
+const AVAILABLE_MODELS = [
+  { path: "playlists", label: "Playlists" },
+  { path: "albums", label: "Albums" },
+  { path: "artists", label: "Artists" },
+];
 
 const BACKEND_BASE_URL = "http://localhost:9292";
 
