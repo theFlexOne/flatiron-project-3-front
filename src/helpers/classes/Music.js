@@ -1,20 +1,22 @@
+import { AVAILABLE_MODELS } from "../constants";
+import Playlist from "./Playlist";
+
+const models = AVAILABLE_MODELS;
 export default class Music {
-  constructor(context) {
-    this._keys = Object.keys(context);
-    createMusicProperties(context, this);
+  constructor(data) {
+    console.log(`Setting up Music instance with data:`, data);
+    this._data = data;
+
+    Object.freeze(this._data);
   }
-  get selectedTab() {
-    return this._currentPath;
+
+  get playlists() {
+    return this._data?.playlists || [];
   }
-  get navTabs() {
-    return this._models;
-  }
-  // set _rawData(context) {
-  // }
 }
 
-const createMusicProperties = (context, instance) => {
-  Object.entries(context).forEach(([key, value]) => {
-    instance["_" + key] = value;
+const createProps = (data, instance) => {
+  Object.entries(data).forEach(([key, value]) => {
+    instance[key] = value;
   });
 };

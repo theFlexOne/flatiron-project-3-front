@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BACKEND_BASE_URL } from "../../helpers/constants";
+import { BACKEND_BASE_URL, BACKEND_PATHS } from "../../helpers/constants";
 
 class BackendInitializationError extends Error {
   constructor(err = null) {
@@ -18,30 +18,46 @@ const backendGet = async (model, config = {}) => {
 };
 
 class Backend {
-  static _exists = false;
-  static _backendInstance;
-  recentResponse;
+  constructor(setState) {
+    if (Backend.instance instanceof Backend) {
+      return Backend.instance;
+    }
+    this.setState = setState;
+    this.config = {
+      baseURL: BACKEND_BASE_URL,
+      paths: BACKEND_PATHS,
+    };
 
-  constructor(config) {
-    if (Backend._exists) return new Error("Backend already exists");
-    this._config = config || {};
-    Backend._backendInstance = this;
-    Backend._exists = true;
+    Object.freeze(this.baseURL);
+    Object.freeze(this);
+    Backend.instance = this;
   }
 
-  get backendURL() {
-    return BACKEND_BASE_URL;
+  static getInstance(setState) {
+    return new Backend(setState);
   }
 
-  fetchPlaylists() {
-    return backendGet("playlists");
+  async fetchPlaylists() {
+    return await this.fetch("playlists");
+  }
+  async fetchAlbums() {
+    return await this.fetch("albums");
+  }
+  async fetchArtists() {
+    return await this.fetch("artists");
+  }
+
+  async fetch(path, config = {}) {
+    let data;
+    try {
+      const url = new URL(path, BACKEND_BASE_URL).href;
+      const res = await axios.get(url, config);
+      data = await res.data;
+    } catch (err) {
+      console.error(err);
+    }
+    return data;
   }
 }
 
-const initBackend = (config = {}) => {
-  if (Backend._exists) return console.warn("Backend already exists");
-  const backend = new Backend(config);
-  return backend;
-};
-
-export { initBackend };
+export default Backend;
