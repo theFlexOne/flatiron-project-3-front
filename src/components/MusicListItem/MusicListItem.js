@@ -4,6 +4,8 @@ import "./musicListItem.css";
 const MusicListItem = (props) => {
   const { data, onRecordClick } = props;
 
+  console.log(`data`, data);
+
   const handleClick = () => {
     onRecordClick(data.id);
   };

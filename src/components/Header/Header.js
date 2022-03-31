@@ -14,16 +14,11 @@ const HeaderLink = ({ children, ...other }) => {
 const Header = () => {
   return (
     <header className="header">
-      {/* <Link to="/" className="logo-link"> */}
       <span className="logo">LOGO</span>
       {/* <img src="" alt="logo" height="30px" /> */}
-      {/* </Link> */}
       <nav className="nav-links">
         <HeaderLink to="/music">Music</HeaderLink>
         <HeaderLink to="/spotify">Search Spotify</HeaderLink>
-        {/* <a className="link" href="https://www.github.com">
-          GitHub
-        </a> */}
       </nav>
     </header>
   );
