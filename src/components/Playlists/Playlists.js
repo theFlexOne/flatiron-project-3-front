@@ -1,12 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { useMusic } from "../../context/MusicContext";
 import Playlist from "../../helpers/classes/Playlist";
 import { HEADERS } from "../../helpers/constants";
 import MusicInfo from "../MusicInfo/MusicInfo";
+import MusicInput from "../MusicInput/MusicInput";
 import MusicList from "../MusicList/MusicList";
 import "./playlists.css";
 
-const createPlaylistsData = (data) => {
+const createPlaylists = (data) => {
   const playlists = data.map((playlist) => {
     const imgURL = playlist?.img_url || "";
     const name = playlist?.name || "unknown";
@@ -17,39 +19,35 @@ const createPlaylistsData = (data) => {
   return playlists;
 };
 
-const usePlaylistsContext = () => {
-  const data = useOutletContext();
-  const memoizedPlaylists = useMemo(() => {
-    const playlists = createPlaylistsData(data);
-    return playlists;
-  }, [data]);
-  return memoizedPlaylists;
-};
-
 const Playlists = (props) => {
-  const [recordData, setRecordData] = useState({});
-  const [playlists, setPlaylists] = useState([]);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
 
-  const outletData = usePlaylistsContext();
+  const music = useOutletContext();
+  // console.log(`music`, music);
 
-  useEffect(() => {
-    const playlists = outletData.map((p) => {
-      const playlist = new Playlist(p);
-      return playlist;
-    });
-    setPlaylists(playlists);
-  }, [outletData]);
+  const handlePlaylistSelect = () => {};
 
   return (
     <div className="playlists">
-      {playlists && (
-        <>
-          <MusicList listLabel={"Playlists"} listData={playlists} />
-          <MusicInfo recordData={recordData} />
-        </>
-      )}
+      <div className="music-input-container">
+        <MusicInput />
+      </div>
+      <div className="music-content-container">
+        <MusicList data={music.playlists} label="Playlists" />
+      </div>
     </div>
   );
 };
 
 export default Playlists;
+
+/*
+
+      <MusicList
+        data={music.playlists}
+        listLabel={"Playlists"}
+        onItemSelect={handlePlaylistSelect}
+      />
+      {selectedPlaylist && <MusicInfo data={selectedPlaylist} />}
+
+*/

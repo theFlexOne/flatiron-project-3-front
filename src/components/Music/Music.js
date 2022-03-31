@@ -1,17 +1,34 @@
 import React, { useEffect } from "react";
 import "./music.css";
 import MusicNav from "../MusicNav/MusicNav";
-import { Outlet, useNavigate } from "react-router-dom";
+import {
+  Navigate,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useOutletContext,
+} from "react-router-dom";
 import { useMusic } from "../../context/MusicContext";
 
 const Music = () => {
-  const music = useMusic();
-  const activeModel = music._activeModel;
+  const navigate = useNavigate();
+  const music = useOutletContext();
+
+  useEffect(() => {
+    navigate("playlists");
+  }, []);
+  useEffect(() => {
+    console.log(`music`, music);
+  }, [music]);
 
   return (
     <div className="music">
-      <MusicNav />
-      {activeModel && <Outlet context={activeModel} />}
+      {music && (
+        <>
+          <MusicNav />
+          <Outlet context={music} />
+        </>
+      )}
     </div>
   );
 };
