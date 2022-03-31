@@ -1,12 +1,15 @@
 import "./App.css";
 import Header from "./components/Header/Header";
-import { Outlet } from "react-router-dom";
+import AppRoutes from "./Routes";
+import { useLocation } from "react-router-dom";
 
 function App() {
   return (
     <div className="app">
       <Header />
-      <Outlet />
+      <main>
+        <AppRoutes />
+      </main>
     </div>
   );
 }
