@@ -1,10 +1,16 @@
-export default class Path {
+const sectionsRegex = new RegExp(/(?<=\/)\w+/, "g");
+
+export default class URLPath {
   constructor(pathname) {
     this.pathname = pathname;
   }
 
+  get length() {
+    return this.sections.length;
+  }
+
   get sections() {
-    return this.pathname.slice(1).split("/");
+    return [...this.pathname.matchAll(sectionsRegex)].map((s) => s[0]);
   }
 
   get root() {

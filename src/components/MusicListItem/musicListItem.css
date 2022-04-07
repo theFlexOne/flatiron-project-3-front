@@ -1,3 +1,5 @@
-.music-list-item {
-  flex-grow: 1;
-}
+/* .music-list-item {
+  flex-shrink: 1;
+  flex-basis: 25%;
+  /* flex-grow: 1; */
+} */

@@ -1,14 +1,20 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+} from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Music from "../helpers/classes/Music";
-import { AVAILABLE_MODELS } from "../helpers/constants";
+import URLPath from "../helpers/classes/URLPath";
+import { DEFAULT_MODEL } from "../helpers/constants";
 import Backend from "../services/backend/backend";
 
 const MusicContext = createContext();
 
 const activePathRegex = new RegExp(/\/music\/?(.+)/);
-
-const models = AVAILABLE_MODELS;
 
 const initialState = {
   playlists: [],
@@ -16,37 +22,61 @@ const initialState = {
   artists: [],
 };
 
+const reducer = (state, action) => {
+  console.log(`state`, state);
+  console.log(`action`, action);
+  switch (action.type) {
+    case "set": {
+      const { data, model } = action;
+      state[model] = data;
+      console.log(`state`, state);
+      return state;
+    }
+    default:
+      return state;
+  }
+};
+
 const MusicProvider = ({ children }) => {
-  const [musicData, setMusicData] = useState(null);
+  const backend = useMemo(() => Backend.getInstance(), []);
+  const navigate = useNavigate();
 
-  const backend = useMemo(() => Backend.getInstance(setMusicData), []);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  //
+  console.log(`state`, state);
+
   const { pathname } = useLocation();
-  const activePath = pathname.match(activePathRegex)?.[1] || null;
+  const path = new URLPath(pathname);
+  const model = path.sections[1];
 
-  const music = useMemo(() => new Music(musicData), [musicData]);
-
-  const setState = (state) => {
-    return { ...musicData, ...state };
+  const actions = {
+    set(model, data) {
+      dispatch({ type: "set", model, data });
+    },
+    async addTrackToPlaylist(tId, pId) {},
   };
 
-  console.log(`musicData`, musicData);
-
   useEffect(() => {
-    if (activePath && music) {
+    if (model) {
+      if (state[model] == true) return;
       backend
-        .fetch(activePath)
-        .then((data) => setMusicData({ [activePath]: data }))
+        .fetchModel(model)
+        .then((data) => actions.set(model, data))
         .catch(console.error);
     }
-  }, [activePath]);
+  }, [model]);
+
+  useEffect(() => {
+    if (!model) navigate(`/${path.root}/${DEFAULT_MODEL}`);
+  }, []);
 
   return (
     backend &&
-    activePath && (
-      <MusicContext.Provider value={{ activePath }}>
-        {<Outlet context={music} />}
+    model && (
+      <MusicContext.Provider
+        value={{ music: state, activeModel: model, actions }}
+      >
+        {<Outlet />}
       </MusicContext.Provider>
     )
   );
@@ -56,6 +86,7 @@ const useMusic = () => {
   const context = useContext(MusicContext);
 
   // check for errors here...
+
   return context;
 };
 

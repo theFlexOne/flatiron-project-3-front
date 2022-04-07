@@ -1,0 +1,29 @@
+.music-info {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  border: 2px solid black;
+  background-color: darkgray;
+  border-radius: 12px;
+}
+
+.music-info .details-container {
+  width: 100%;
+  display: flex;
+}
+
+.music-info .details-container img {
+  max-width: 250px;
+  aspect-ratio: 1 / 1;
+}
+
+.music-info .details-right {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.music-info form {
+  margin-top: auto;
+  margin-bottom: 2em;
+}

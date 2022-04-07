@@ -1,31 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BACKEND_BASE_URL, BACKEND_PATHS } from "../../helpers/constants";
-
-class BackendInitializationError extends Error {
-  constructor(err = null) {
-    super(err);
-    this.message =
-      "An instance of 'Backend' already exists. THERE CAN BE ONLY ONE!.";
-  }
-}
-
-const backendGet = async (model, config = {}) => {
-  const url = new URL(model, BACKEND_BASE_URL).href;
-  const response = await axios.get(url, config);
-  const data = await response.data;
-  return data;
-};
+import { BACKEND_BASE_URL, MODELS } from "../../helpers/constants";
 
 class Backend {
-  constructor(setState) {
+  constructor() {
     if (Backend.instance instanceof Backend) {
       return Backend.instance;
     }
-    this.setState = setState;
     this.config = {
       baseURL: BACKEND_BASE_URL,
-      paths: BACKEND_PATHS,
+      paths: MODELS,
     };
 
     Object.freeze(this.baseURL);
@@ -33,8 +17,8 @@ class Backend {
     Backend.instance = this;
   }
 
-  static getInstance(setState) {
-    return new Backend(setState);
+  static getInstance() {
+    return new Backend();
   }
 
   async fetchPlaylists() {
@@ -47,16 +31,20 @@ class Backend {
     return await this.fetch("artists");
   }
 
-  async fetch(path, config = {}) {
+  async fetchModel(model, config = {}) {
     let data;
     try {
-      const url = new URL(path, BACKEND_BASE_URL).href;
+      const url = new URL(model, BACKEND_BASE_URL).href;
       const res = await axios.get(url, config);
       data = await res.data;
     } catch (err) {
       console.error(err);
     }
     return data;
+  }
+
+  async addTrackToPlaylist(tId, pId) {
+    // TODO: handle this next
   }
 }
 

@@ -1,7 +1,3 @@
-import { AVAILABLE_MODELS } from "../constants";
-import Playlist from "./Playlist";
-
-const models = AVAILABLE_MODELS;
 export default class Music {
   constructor(data) {
     console.log(`Setting up Music instance with data:`, data);

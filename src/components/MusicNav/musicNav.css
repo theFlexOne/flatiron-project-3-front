@@ -2,7 +2,7 @@
   flex-grow: 1;
   display: flex;
   text-align: center;
-  background-color: #004d3d;
+  background-color: #09332b;
   min-height: 40px;
   align-items: center;
   font-family: "Syne Mono", monospace;
@@ -13,14 +13,14 @@
 .music-tab {
   flex-grow: 1;
   flex-basis: 100%;
-  color: #1c1320;
+  color: #726577;
 }
 
 .music-tab.selected {
   font-size: 1.8rem;
   margin: 0.15rem 0.35rem;
   /* background-color: #3a303f; */
-  color: #a391ac;
+  color: #9365aa;
   font-weight: bold;
 }
 

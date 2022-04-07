@@ -1,10 +1,6 @@
-const AVAILABLE_MODELS = [
-  { path: "playlists", label: "Playlists" },
-  { path: "albums", label: "Albums" },
-  { path: "artists", label: "Artists" },
-];
+const MODELS = ["playlists", "albums", "artists"];
 
-const BACKEND_PATHS = ["playlists", "albums", "artists"];
+const DEFAULT_MODEL = "playlists";
 
 const BACKEND_BASE_URL = "http://localhost:9292";
 
@@ -14,4 +10,4 @@ const HEADERS = {
   ARTISTS_HEADERS: [],
 };
 
-export { AVAILABLE_MODELS, BACKEND_BASE_URL, HEADERS, BACKEND_PATHS };
+export { BACKEND_BASE_URL, HEADERS, MODELS, DEFAULT_MODEL };
