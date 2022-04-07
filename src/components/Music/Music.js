@@ -5,12 +5,15 @@ import { BACKEND_BASE_URL } from "../../helpers/constants";
 import "./music.css";
 
 const Music = () => {
-  const [playlists, setPlaylists] = useState([]);
-  const [albums, setAlbums] = useState([]);
+  const [music, setMusic] = useState({
+    playlists: [],
+    albums: [],
+  });
 
   const { pathname } = useLocation();
   const activeModel = pathname.match(/(?<=^\/music\/)[^\/]+/)?.[0];
 
+  console.log(`music`, music);
   console.log(`activeModel`, activeModel);
 
   const navigate = useNavigate();
@@ -21,16 +24,21 @@ const Music = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      axios.get(BACKEND_BASE_URL + "/" + pathname);
+      try {
+        const res = await axios.get(BACKEND_BASE_URL + "/" + activeModel);
+        console.log(`res`, res);
+        setMusic({ ...music, [activeModel]: res.data });
+      } catch (err) {
+        console.error(err);
+      }
     };
-    // if (albums.length > 0)
-    fetchData();
+    !music[activeModel][0] && activeModel && fetchData();
   }, [activeModel]);
 
-  return (
-    <div className="music">
-      <Outlet context={{}} />
-    </div>
+  return music[activeModel][0] ? (
+    <Outlet context={music[activeModel]} />
+  ) : (
+    <h2>LOADING...</h2>
   );
 };
 

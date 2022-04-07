@@ -47,10 +47,10 @@ class Backend {
     return await this.fetch("artists");
   }
 
-  async fetch(path, config = {}) {
+  async fetch(model, config = {}) {
     let data;
     try {
-      const url = new URL(path, BACKEND_BASE_URL).href;
+      const url = new URL(model, BACKEND_BASE_URL).href;
       const res = await axios.get(url, config);
       data = await res.data;
     } catch (err) {

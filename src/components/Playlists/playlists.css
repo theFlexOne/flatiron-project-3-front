@@ -1,0 +1,25 @@
+.playlist-thumbnails {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #00725c;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.playlist-thumbnails .thumbnail {
+  padding: 0.5em;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  background-color: rgb(203, 203, 203);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: 20%;
+}
+
+.playlist-thumbnails img {
+  max-width: 100px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
