@@ -1,0 +1,85 @@
+.playlist {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  gap: 1em;
+}
+
+.playlist > * {
+  flex-grow: 1;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 1em 2em;
+  background-color: #009578;
+}
+
+.playlist .playlist-edit,
+.playlist .playlist-info {
+  display: flex;
+  justify-content: center;
+}
+
+.playlist .playlist-info {
+  flex-direction: column;
+}
+
+.playlist .playlist-edit label {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+.playlist-edit form {
+  display: flex;
+}
+
+.playlist-edit .radio-buttons-wrapper {
+  display: flex;
+  margin-right: 2em;
+}
+
+.playlist-edit .radio-buttons-wrapper label {
+  margin-left: 1em;
+}
+
+.playlist-edit .btn {
+  padding: 0.25rem 0.75rem;
+  border-radius: 5px;
+}
+
+.playlist .playlist-details {
+  display: flex;
+  gap: 1.5em;
+  font-size: 1.5rem;
+}
+
+.playlist .playlist-details > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.playlist .playlist-tracks {
+  padding: 1em;
+}
+
+.playlist-tracks table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 1rem;
+  min-width: 600px;
+}
+
+.playlist-tracks tbody {
+  margin-top: 1rem;
+}
+
+.playlist-tracks thead tr {
+  text-align: left;
+  background-color: #3a303f;
+  font-weight: bold;
+}
+
+.playlist-tracks table td,
+.playlist-tracks table th {
+  padding: 0.25rem 0.5rem;
+}
