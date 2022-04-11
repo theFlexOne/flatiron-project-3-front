@@ -1,24 +1,18 @@
-import { useEffect, useState } from "react";
-import { useOutletContext, useLocation, useNavigate } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import "./playlists.css";
+import unavailableImg from "../../assets/No_Image_Available.jpg";
+import usePathname from "../../hooks/usePathname";
 
 const Playlists = () => {
   const { playlists } = useOutletContext();
-  const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const [currentId] = pathname.match(/(?<=^\/music\/playlists\/)\d+/) || [null];
+  const { pathname } = usePathname();
 
   const onPlaylistClick = (e) => {
     const { id } = e.currentTarget;
-    navigate(pathname + "/" + id);
+    navigate(`${pathname}/${id}`);
   };
-
-  useEffect(() => {
-    currentId && navigate(pathname + "/" + currentId);
-  });
-
-  console.log(`playlists`, playlists);
 
   return (
     <div className="playlists music">
@@ -31,7 +25,10 @@ const Playlists = () => {
             id={pl.id}
             onClick={onPlaylistClick}
           >
-            <img src={pl.img_url} alt={`playlist-image`} />
+            <img
+              src={pl.img_url === "f" ? unavailableImg : pl.img_url}
+              alt={`playlist-image`}
+            />
             <p>{pl.name}</p>
           </div>
         ))}

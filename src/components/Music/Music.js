@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { BACKEND_BASE_URL } from "../../helpers/constants";
+import usePathname from "../../hooks/usePathname";
 import "./music.css";
 
 const Music = () => {
@@ -12,8 +13,8 @@ const Music = () => {
 
   console.log(`music`, music);
 
-  const { pathname } = useLocation();
-  const activeModel = pathname.match(/(?<=^\/music\/)[^\/]+/)?.[0];
+  const path = usePathname();
+  const activeModel = path[1] || "";
 
   const navigate = useNavigate();
 
@@ -48,8 +49,8 @@ const Music = () => {
   };
 
   useEffect(() => {
-    if (pathname.match(/^\/music\/?$/)) navigate("playlists");
-  }, [pathname]);
+    if (!activeModel) navigate("playlists");
+  }, [activeModel]);
 
   useEffect(() => {
     const fetchData = async () => {
