@@ -1,0 +1,90 @@
+.record-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  gap: 1em;
+}
+
+.record-container > * {
+  flex-grow: 1;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 1em 2em;
+  background-color: #009578;
+}
+
+.record-container .record-edit,
+.record-container .record-info {
+  display: flex;
+  justify-content: center;
+}
+
+.record-container .record-info {
+  flex-direction: column;
+}
+
+.record-info button {
+  align-self: flex-start;
+  margin-bottom: 1em;
+}
+
+/* .record-container .record-edit label {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+.record-edit form {
+  display: flex;
+}
+
+.record-edit .radio-buttons-wrapper {
+  display: flex;
+  margin-right: 2em;
+}
+
+.record-edit .radio-buttons-wrapper label {
+  margin-left: 1em;
+}
+
+.record-edit .btn {
+  padding: 0.25rem 0.75rem;
+  border-radius: 5px;
+} */
+
+.record-container .record-details {
+  display: flex;
+  gap: 1.5em;
+  font-size: 1.5rem;
+}
+
+.record-container .record-details > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.record-container .record-tracks {
+  padding: 1em;
+}
+
+.record-tracks table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 1rem;
+  min-width: 600px;
+}
+
+.record-tracks tbody {
+  margin-top: 1rem;
+}
+
+.record-tracks thead tr {
+  text-align: left;
+  background-color: #3a303f;
+  font-weight: bold;
+}
+
+.record-tracks table td,
+.record-tracks table th {
+  padding: 0.25rem 0.5rem;
+}

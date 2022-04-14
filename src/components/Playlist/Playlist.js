@@ -1,20 +1,26 @@
 import "./playlist.css";
-
 import React, { useState } from "react";
-import { useLocation, useOutletContext } from "react-router-dom";
+import {
+  matchPath,
+  resolvePath,
+  useHref,
+  useNavigate,
+  useOutletContext,
+} from "react-router-dom";
+import MusicForm from "../MusicForm/MusicForm";
+import usePathname from "../../hooks/usePathname";
 
 const Playlist = () => {
-  const [isAdding, setIsAdding] = useState(true);
-  const [trackID, setTrackID] = useState("");
-
   const { playlists, actions } = useOutletContext();
-  const { pathname } = useLocation();
+  const [trackID, setTrackID] = useState("");
+  const navigate = useNavigate();
 
-  const [id] = pathname.match(/(?<=^\/music\/playlists\/)\d+/) || [null];
+  const path = usePathname();
+  const id = path[2];
 
   const playlist = playlists.find((p) => p.id === +id);
 
-  const handleSubmit = (e) => {
+  const handlePlaylistTrackSubmit = (e, isAdding) => {
     e.preventDefault();
 
     const tID = trackID;
@@ -24,43 +30,20 @@ const Playlist = () => {
   };
 
   return (
-    <div className="playlist">
-      <div className="playlist-edit">
-        <form className="add-remove-form" onSubmit={handleSubmit}>
-          <label htmlFor="id-input">
-            {`${isAdding ? "Add" : "Remove"} track`}:
-          </label>
-          <input
-            type="number"
-            name="id-input"
-            id="id-input"
-            placeholder="Track ID"
-            value={trackID}
-            onChange={(e) => setTrackID(e.target.value)}
-          />
-          <span className="radio-buttons-wrapper">
-            <label htmlFor="add">Add:</label>
-            <input
-              type="radio"
-              name="add-remove"
-              id="add"
-              checked={isAdding === true}
-              onChange={() => setIsAdding(true)}
-            />
-            <label htmlFor="remove">Remove:</label>
-            <input
-              type="radio"
-              name="add-remove"
-              id="remove"
-              checked={isAdding === false}
-              onChange={() => setIsAdding(false)}
-            />
-          </span>
-          <input type="submit" className="btn" />
-        </form>
-      </div>
-      <div className="playlist-info">
-        <div className="playlist-details">
+    <div className="playlist record-container">
+      <MusicForm
+        trackID={trackID}
+        setTrackID={setTrackID}
+        handleSubmit={handlePlaylistTrackSubmit}
+      />
+      <div className="playlist-info record-info">
+        <button
+          className="back-btn"
+          onClick={() => navigate(path.parentPathname, { replace: true })}
+        >
+          {"BACK" /* <- should be an icon */}
+        </button>
+        <div className="playlist-details record-details">
           <img
             src={playlist.img_url}
             alt="playlist image"
@@ -71,7 +54,7 @@ const Playlist = () => {
             <h2>{playlist.name}</h2>
           </div>
         </div>
-        <div className="playlist-tracks">
+        <div className="playlist-tracks record-tracks">
           <table>
             <thead>
               <tr>
@@ -84,13 +67,12 @@ const Playlist = () => {
             </thead>
             <tbody>
               {playlist.tracks.map((pl) => {
-                console.log(`pl`, pl);
                 return (
                   <tr key={pl.id}>
                     <td>{pl.id}</td>
                     <td>{pl.name}</td>
                     <td>{pl?.album?.name || "unknown"}</td>
-                    <td>{pl?.album?.artist?.name || "unknown"}</td>
+                    <td>{pl?.artist?.name || "unknown"}</td>
                     <td>{pl.duration}</td>
                   </tr>
                 );

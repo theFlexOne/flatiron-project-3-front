@@ -17,11 +17,11 @@ const Playlists = () => {
   return (
     <div className="playlists music">
       <h2>Playlists</h2>
-      <div className="playlist-thumbnails thumbnails">
+      <div className="cards-container">
         {playlists.map((pl) => (
           <div
             key={pl.id}
-            className="thumbnail"
+            className="card"
             id={pl.id}
             onClick={onPlaylistClick}
           >

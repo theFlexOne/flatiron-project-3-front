@@ -4,6 +4,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { BACKEND_BASE_URL } from "../../helpers/constants";
 import usePathname from "../../hooks/usePathname";
 import "./music.css";
+import MusicNav from "../MusicNav/MusicNav";
 
 const Music = () => {
   const [music, setMusic] = useState({
@@ -25,15 +26,20 @@ const Music = () => {
 
   const actions = {
     async addTrackToPlaylist(tID, pID) {
-      const url = buildURL(pID, tID);
+      const url = new URL("playlist_tracks", BACKEND_BASE_URL);
+      url.searchParams.set("playlist_id", pID);
+      url.searchParams.set("track_id", tID);
       const res = await axios.post(url);
+      console.log(`res`, res);
       const track = res.data;
       const newCollection = { ...music };
       newCollection.playlists.find((p) => p.id === pID).tracks.push(track);
       setMusic(newCollection);
     },
     async removeTrackFromPlaylist(tID, pID) {
-      const url = buildURL(pID, tID);
+      const url = new URL("playlist_tracks", BACKEND_BASE_URL);
+      url.searchParams.set("playlist_id", pID);
+      url.searchParams.set("track_id", tID);
       const res = await axios.delete(url);
       const newCollection = { ...music };
       const tracks = newCollection.playlists.find((p) => p.id == pID).tracks;
@@ -64,10 +70,15 @@ const Music = () => {
     !music[activeModel]?.[0] && activeModel && fetchData();
   }, [activeModel]);
 
-  return music[activeModel]?.[0] ? (
-    <Outlet context={{ [activeModel]: music[activeModel], actions }} />
-  ) : (
-    <h2>LOADING...</h2>
+  return (
+    <>
+      <MusicNav />
+      {music[activeModel]?.[0] ? (
+        <Outlet context={{ [activeModel]: music[activeModel], actions }} />
+      ) : (
+        <h2>LOADING...</h2>
+      )}
+    </>
   );
 };
 

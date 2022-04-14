@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { resolvePath, useLocation } from "react-router-dom";
 
 const PATHNAME_SEGMENTS_REGEXP = /(?<=\/)[^\/?]+/g;
 
@@ -10,9 +10,11 @@ const usePathname = () => {
   const rootPath = pathSegments[0];
   const currentPath = pathSegments.slice(-1)[0];
   const parentPath = pathSegments.slice(-2)[0] || "";
+  const parentPathname = `/${pathSegments.slice(0, -1).join("/")}`;
 
   const pathObj = {
     pathname,
+    parentPathname,
     pathSegments,
     rootPath,
     parentPath,

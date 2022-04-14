@@ -4,7 +4,7 @@ const AVAILABLE_MODELS = [
   { path: "artists", label: "Artists" },
 ];
 
-const BACKEND_PATHS = ["playlists", "albums", "artists"];
+const BACKEND_PATHS = ["playlists", "albums"];
 
 const BACKEND_BASE_URL = "http://localhost:9292";
 

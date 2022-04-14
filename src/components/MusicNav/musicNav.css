@@ -13,10 +13,9 @@
 .music-tab {
   flex-grow: 1;
   flex-basis: 100%;
-  color: #1c1320;
 }
 
-.music-tab.selected {
+.music-tab.active p {
   font-size: 1.8rem;
   margin: 0.15rem 0.35rem;
   /* background-color: #3a303f; */
@@ -32,12 +31,15 @@
   border-right: 1.5px solid #1c1320;
 }
 
-.music-tab a {
-  color: inherit;
+a.music-tab p {
+  color: #1c1320;
+}
+
+a.music-tab {
   text-decoration: none;
   font-weight: inherit;
 }
 
-.music-tab a:visited {
+a.music-tab:visited {
   color: inherit;
 }
