@@ -1,4 +1,4 @@
-import { resolvePath, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const PATHNAME_SEGMENTS_REGEXP = /(?<=\/)[^\/?]+/g;
 
